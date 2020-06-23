@@ -1,4 +1,6 @@
 security:
+    encoders:
+        App\Entity\user: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
@@ -21,3 +23,6 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+    #security:
+    #    encoders:
+    #        App\Entity\user: bcrypt

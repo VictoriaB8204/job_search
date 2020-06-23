@@ -1,0 +1,19 @@
+{# templates/registration/register.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block body %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;">
+
+    <h1>Регистрация</h1>
+
+{{ form_start(form) }}
+    {{ form_row(form.username , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+    {{ form_row(form.email , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+    {{ form_row(form.plainPassword.first , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+    {{ form_row(form.plainPassword.second , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+
+<button type="submit" class="btn btn-info">Зарегистрироваться</button>
+{{ form_end(form) }}
+{% endblock %}
