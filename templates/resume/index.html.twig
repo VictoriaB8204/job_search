@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resume index{% endblock %}
+
+{% block body %}
+    <h1>Resume index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Moderation_status</th>
+                <th>Refuse_reason</th>
+                <th>Work_experience</th>
+                <th>Education</th>
+                <th>Salary</th>
+                <th>Personal_quality</th>
+                <th>Info</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resume in resumes %}
+            <tr>
+                <td>{{ resume.id }}</td>
+                <td>{{ resume.status }}</td>
+                <td>{{ resume.moderationStatus }}</td>
+                <td>{{ resume.refuseReason }}</td>
+                <td>{{ resume.workExperience }}</td>
+                <td>{{ resume.education }}</td>
+                <td>{{ resume.salary }}</td>
+                <td>{{ resume.personalQuality }}</td>
+                <td>{{ resume.info }}</td>
+                <td>
+                    <a href="{{ path('resume_show', {'id': resume.id}) }}">show</a>
+                    <a href="{{ path('resume_edit', {'id': resume.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('resume_new') }}">Create new</a>
+{% endblock %}

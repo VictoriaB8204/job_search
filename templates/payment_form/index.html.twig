@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PaymentForm index{% endblock %}
+
+{% block body %}
+    <h1>PaymentForm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for payment_form in payment_forms %}
+            <tr>
+                <td>{{ payment_form.id }}</td>
+                <td>{{ payment_form.name }}</td>
+                <td>
+                    <a href="{{ path('payment_form_show', {'id': payment_form.id}) }}">show</a>
+                    <a href="{{ path('payment_form_edit', {'id': payment_form.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('payment_form_new') }}">Create new</a>
+{% endblock %}

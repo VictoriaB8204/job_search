@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Responses{% endblock %}
+
+{% block body %}
+    <h1>Responses</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ response.id }}</td>
+            </tr>
+            <tr>
+                <th>Worker_date</th>
+                <td>{{ response.workerDate ? response.workerDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Worker_status</th>
+                <td>{{ response.workerStatus }}</td>
+            </tr>
+            <tr>
+                <th>Employer_date</th>
+                <td>{{ response.employerDate ? response.employerDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Employer_status</th>
+                <td>{{ response.employerStatus }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('responses_index') }}">back to list</a>
+
+    <a href="{{ path('responses_edit', {'id': response.id}) }}">edit</a>
+
+    {{ include('responses/_delete_form.html.twig') }}
+{% endblock %}

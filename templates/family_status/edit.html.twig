@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit FamilyStatus{% endblock %}
+
+{% block body %}
+    <h1>Edit FamilyStatus</h1>
+
+    {{ include('family_status/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('family_status_index') }}">back to list</a>
+
+    {{ include('family_status/_delete_form.html.twig') }}
+{% endblock %}

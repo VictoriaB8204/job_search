@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vacancy index{% endblock %}
+
+{% block body %}
+    <h1>Vacancy index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>Moderation_status</th>
+                <th>Refuse_reason</th>
+                <th>Work_place</th>
+                <th>Work_experience</th>
+                <th>Education</th>
+                <th>Job_description</th>
+                <th>Learning_opportunity</th>
+                <th>Info</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vacancy in vacancies %}
+            <tr>
+                <td>{{ vacancy.id }}</td>
+                <td>{{ vacancy.status }}</td>
+                <td>{{ vacancy.moderationStatus }}</td>
+                <td>{{ vacancy.refuseReason }}</td>
+                <td>{{ vacancy.workPlace }}</td>
+                <td>{{ vacancy.workExperience }}</td>
+                <td>{{ vacancy.education }}</td>
+                <td>{{ vacancy.jobDescription }}</td>
+                <td>{{ vacancy.learningOpportunity }}</td>
+                <td>{{ vacancy.info }}</td>
+                <td>
+                    <a href="{{ path('vacancy_show', {'id': vacancy.id}) }}">show</a>
+                    <a href="{{ path('vacancy_edit', {'id': vacancy.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('vacancy_new') }}">Create new</a>
+{% endblock %}

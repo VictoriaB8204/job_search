@@ -7,7 +7,7 @@
 
     <h1>Личный кабинет</h1>
 
-    <p> Имя пользователя: {{ user.name }} </p>
+    <p> Имя пользователя: {{ user.username }} </p>
 
     <p> Почта: {{ user.email }} </p>
 
@@ -15,6 +15,6 @@
 
     <p> Семейное положение: {{ user.getFamilyStatus }} </p>
 
-    <button type="submit" class="btn btn-info">Изменить</button>
+    <a href="{{ url('home') }}">Изменить</a>
 
 {% endblock %}

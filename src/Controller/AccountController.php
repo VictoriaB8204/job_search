@@ -14,14 +14,10 @@ class AccountController extends AbstractController
      */
     public function index()
     {
-        $user = new User();
-        $user->setName("Roman");
+        $user = $this->getUser();
 
         return $this->render('account/index.html.twig', [
             'user' => $user,
         ]);
-//        return $this->render('account/index.html.twig', [
-//            'user' => $user
-//        ]);
     }
 }

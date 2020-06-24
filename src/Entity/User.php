@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Login already taken")
  */
 class User implements UserInterface
 {
@@ -24,7 +25,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $username;
 
@@ -34,19 +35,9 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="binary", nullable=true)
+     * @ORM\Column(type="json")
      */
-    private $admin;
-
-    /**
-     * @ORM\Column(type="binary", nullable=true)
-     */
-    private $worker;
-
-    /**
-     * @ORM\Column(type="binary", nullable=true)
-     */
-    private $employer;
+    private $roles = [];
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -116,42 +107,6 @@ class User implements UserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
-
-        return $this;
-    }
-
-    public function getAdmin()
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin($admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
-
-    public function getWorker()
-    {
-        return $this->worker;
-    }
-
-    public function setWorker($worker): self
-    {
-        $this->worker = $worker;
-
-        return $this;
-    }
-
-    public function getEmployer()
-    {
-        return $this->employer;
-    }
-
-    public function setEmployer($employer): self
-    {
-        $this->employer = $employer;
 
         return $this;
     }
@@ -268,7 +223,7 @@ class User implements UserInterface
 
     public function getRoles()
     {
-        return null;
+        return $this->roles;
     }
 
     public function getSalt()
@@ -278,7 +233,7 @@ class User implements UserInterface
 
     public function eraseCredentials()
     {
-        return null;
+        $this->plainPassword = null;
     }
 
     /**
@@ -295,5 +250,18 @@ class User implements UserInterface
     public function setPlainPassword($plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
+    /**
+     * @param array $roles
+     */
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
     }
 }

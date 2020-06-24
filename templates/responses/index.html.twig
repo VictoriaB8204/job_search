@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Responses index{% endblock %}
+
+{% block body %}
+    <h1>Responses index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Worker_date</th>
+                <th>Worker_status</th>
+                <th>Employer_date</th>
+                <th>Employer_status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for response in responses %}
+            <tr>
+                <td>{{ response.id }}</td>
+                <td>{{ response.workerDate ? response.workerDate|date('Y-m-d') : '' }}</td>
+                <td>{{ response.workerStatus }}</td>
+                <td>{{ response.employerDate ? response.employerDate|date('Y-m-d') : '' }}</td>
+                <td>{{ response.employerStatus }}</td>
+                <td>
+                    <a href="{{ path('responses_show', {'id': response.id}) }}">show</a>
+                    <a href="{{ path('responses_edit', {'id': response.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('responses_new') }}">Create new</a>
+{% endblock %}
