@@ -3,18 +3,22 @@
 {% block title %}Личный кабинет{% endblock %}
 
 {% block body %}
+<div align="right">
+    <a href="{{ url('app_logout') }}">Выйти</a>
+</div>
 <div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;">
 
     <h1>Личный кабинет</h1>
 
-    <p> Имя пользователя: {{ user.username }} </p>
+    <p> Имя пользователя: {{ user.name }} </p>
 
     <p> Почта: {{ user.email }} </p>
 
-    <p> Дата рождения: {{ user.getBirthDate }} </p>
+    <p> Дата рождения: {{ user.getStringBirthDate }} </p>
 
     <p> Семейное положение: {{ user.getFamilyStatus }} </p>
 
-    <a href="{{ url('home') }}">Изменить</a>
+    <a href="{{ url('edit_account') }}">Изменить</a>
+</div>
 
 {% endblock %}

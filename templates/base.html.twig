@@ -12,9 +12,12 @@
     </head>
     <body>
         <div>
-            <a href="{{ url('home') }}">домой</a>
-            <a href="{{ url('register') }}">регистрация</a>
-            <a href="{{ url('account') }}">личный кабинет</a>
+            <a href="{{ url('home') }}">Поиск</a>
+            {% if app.user is empty %}
+                <a href="{{ url('app_login') }}">Войти</a>
+            {% else %}
+                <a href="{{ url('account') }}">Личный кабинет</a>
+            {% endif %}
         </div>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block body %}
+    <div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+         xmlns="http://www.w3.org/1999/html">
+
+    <h1>Личный кабинет</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+    {{ form_row(form.email , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+    {{ form_row(form.family_status , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Семейное положение"}) }}
+    {{ form_row(form.birth_date , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
+
+    <button type="submit" class="btn btn-info">Сохранить</button>
+    {{ form_end(form) }}
+
+{% endblock %}
