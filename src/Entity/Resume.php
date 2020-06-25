@@ -25,12 +25,12 @@ class Resume
     private $user_id;
 
     /**
-     * @ORM\Column(type="binary", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $status;
 
     /**
-     * @ORM\Column(type="binary", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $moderation_status;
 

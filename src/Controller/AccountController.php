@@ -18,6 +18,8 @@ class AccountController extends AbstractController
      */
     public function index()
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $user = $this->getUser();
 
         return $this->render('account/index.html.twig', [

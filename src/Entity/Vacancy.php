@@ -20,18 +20,23 @@ class Vacancy
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="vacancies")
+     */
+    private $user_id;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Organization::class, inversedBy="vacancies")
      * @ORM\JoinColumn(nullable=false)
      */
     private $organization_id;
 
     /**
-     * @ORM\Column(type="binary", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $status;
 
     /**
-     * @ORM\Column(type="binary", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $moderation_status;
 
@@ -39,6 +44,11 @@ class Vacancy
      * @ORM\Column(type="text", nullable=true)
      */
     private $refuse_reason;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Position::class, inversedBy="vacancies")
+     */
+    private $position_id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -66,12 +76,17 @@ class Vacancy
     private $education;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $salary;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $job_description;
 
     /**
-     * @ORM\Column(type="binary", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $learning_opportunity;
 
@@ -93,6 +108,18 @@ class Vacancy
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUserId(): ?User
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?User $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
     }
 
     public function getOrganizationId(): ?Organization
@@ -139,6 +166,18 @@ class Vacancy
     public function setRefuseReason(?string $refuse_reason): self
     {
         $this->refuse_reason = $refuse_reason;
+
+        return $this;
+    }
+
+    public function getPositionId(): ?Position
+    {
+        return $this->position_id;
+    }
+
+    public function setPositionId(?Position $position_id): self
+    {
+        $this->position_id = $position_id;
 
         return $this;
     }
@@ -199,6 +238,18 @@ class Vacancy
     public function setEducation(?string $education): self
     {
         $this->education = $education;
+
+        return $this;
+    }
+
+    public function getSalary(): ?int
+    {
+        return $this->salary;
+    }
+
+    public function setSalary(?int $salary): self
+    {
+        $this->salary = $salary;
 
         return $this;
     }
@@ -269,4 +320,5 @@ class Vacancy
 
         return $this;
     }
+
 }

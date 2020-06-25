@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block body %}
+    <h1 align="center">Личный кабинет</h1>
+    <div align="right">
+        <a href="{{ url('app_logout') }}">Выйти</a>
+    </div>
+    <a href="{{ url('account') }}">Личные данные</a>
+
+    {% if app.user.getRoles == ['ROLE_WORKER'] %}
+        <a href="{{ url('resume_index') }}">Мои резюме</a>
+
+    {% elseif app.user.getRoles == ['ROLE_EMPLOYER'] %}
+        <a href="{{ url('organization_index') }}">Мои организации</a>
+        <a href="{{ url('vacancy_index') }}">Мои вакансии</a>
+
+    {% elseif app.user.getRoles == ['ROLE_ADMIN'] %}
+        <br>
+        <a href="{{ url('employment_type_index') }}">Виды занятости</a>
+        <a href="{{ url('family_status_index') }}">Семейное положение</a>
+        <a href="{{ url('payment_form_index') }}">Формы оплаты труда</a>
+        <a href="{{ url('position_index') }}">Должности</a><br>
+        <a href="{{ url('resume_index') }}">Резюме на модерацию</a>
+        <a href="{{ url('vacancy_index') }}">Вакансии на модерацию</a>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+
+{% endblock %}

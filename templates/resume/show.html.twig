@@ -1,54 +1,44 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}Resume{% endblock %}
+{% block title %}Мои резюме{% endblock %}
 
-{% block body %}
-    <h1>Resume</h1>
+{% block content %}
+    <h2>Резюме: {{ resume.getPositionId }}</h2>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ resume.id }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
+                <th>Статус резюме</th>
                 <td>{{ resume.status }}</td>
             </tr>
             <tr>
-                <th>Moderation_status</th>
+                <th>Статус модерации</th>
                 <td>{{ resume.moderationStatus }}</td>
             </tr>
             <tr>
-                <th>Refuse_reason</th>
-                <td>{{ resume.refuseReason }}</td>
-            </tr>
-            <tr>
-                <th>Work_experience</th>
+                <th>Опыт работы</th>
                 <td>{{ resume.workExperience }}</td>
             </tr>
             <tr>
-                <th>Education</th>
+                <th>Образование</th>
                 <td>{{ resume.education }}</td>
             </tr>
             <tr>
-                <th>Salary</th>
+                <th>Зарплата</th>
                 <td>{{ resume.salary }}</td>
             </tr>
             <tr>
-                <th>Personal_quality</th>
+                <th>Личные качества</th>
                 <td>{{ resume.personalQuality }}</td>
             </tr>
             <tr>
-                <th>Info</th>
+                <th>Дополнительно</th>
                 <td>{{ resume.info }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('resume_index') }}">back to list</a>
-
-    <a href="{{ path('resume_edit', {'id': resume.id}) }}">edit</a>
+    <a href="{{ path('resume_edit', {'id': resume.id}) }}">Изменить</a>
 
     {{ include('resume/_delete_form.html.twig') }}
 {% endblock %}

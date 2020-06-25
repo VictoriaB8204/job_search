@@ -20,8 +20,10 @@ class OrganizationController extends AbstractController
      */
     public function index(OrganizationRepository $organizationRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('organization/index.html.twig', [
-            'organizations' => $organizationRepository->findAll(),
+            'organizations' => $organizationRepository->findBy(['user_id' => $this->getUser()->getId()]),
         ]);
     }
 
@@ -30,7 +32,12 @@ class OrganizationController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $organization = new Organization();
+
+        $organization->setUserId($this->getUser());
+
         $form = $this->createForm(OrganizationType::class, $organization);
         $form->handleRequest($request);
 

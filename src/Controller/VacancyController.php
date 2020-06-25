@@ -20,8 +20,10 @@ class VacancyController extends AbstractController
      */
     public function index(VacancyRepository $vacancyRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('vacancy/index.html.twig', [
-            'vacancies' => $vacancyRepository->findAll(),
+            'vacancies' => $vacancyRepository->findBy(['user_id' => $this->getUser()->getId()]),
         ]);
     }
 
@@ -30,7 +32,13 @@ class VacancyController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $vacancy = new Vacancy();
+
+        $vacancy->setUserId($this->getUser());
+        $vacancy->setModerationStatus('на рассмотрении');
+
         $form = $this->createForm(VacancyType::class, $vacancy);
         $form->handleRequest($request);
 

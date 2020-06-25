@@ -20,8 +20,10 @@ class ResumeController extends AbstractController
      */
     public function index(ResumeRepository $resumeRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('resume/index.html.twig', [
-            'resumes' => $resumeRepository->findAll(),
+            'resumes' => $resumeRepository->findBy(['user_id' => $this->getUser()->getId()]),
         ]);
     }
 
@@ -30,7 +32,13 @@ class ResumeController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $resume = new Resume();
+
+        $resume->setUserId($this->getUser());
+        $resume->setModerationStatus('на рассмотрении');
+
         $form = $this->createForm(ResumeType::class, $resume);
         $form->handleRequest($request);
 

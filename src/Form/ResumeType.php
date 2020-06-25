@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Resume;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,15 +13,17 @@ class ResumeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status')
-            ->add('moderation_status')
-            ->add('refuse_reason')
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'актуально' => 'актуально',
+                    'не актуально' => 'не актуально'
+                ]
+            ])
             ->add('work_experience')
             ->add('education')
             ->add('salary')
             ->add('personal_quality')
             ->add('info')
-            ->add('user_id')
             ->add('position_id')
         ;
     }

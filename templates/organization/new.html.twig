@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}New Organization{% endblock %}
+{% block title %}Создать организацию{% endblock %}
 
-{% block body %}
-    <h1>Create new Organization</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Создать орагнизацию</h2>
 
     {{ include('organization/_form.html.twig') }}
 
-    <a href="{{ path('organization_index') }}">back to list</a>
 {% endblock %}

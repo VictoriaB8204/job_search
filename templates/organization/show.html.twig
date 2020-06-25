@@ -1,26 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}Organization{% endblock %}
+{% block title %}Мои организации{% endblock %}
 
-{% block body %}
-    <h1>Organization</h1>
+{% block content %}
+    <h2>Организация</h2>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ organization.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>Название</th>
                 <td>{{ organization.name }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('organization_index') }}">back to list</a>
-
-    <a href="{{ path('organization_edit', {'id': organization.id}) }}">edit</a>
+    <a href="{{ path('organization_edit', {'id': organization.id}) }}">Изменить</a>
 
     {{ include('organization/_delete_form.html.twig') }}
 {% endblock %}

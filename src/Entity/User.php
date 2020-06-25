@@ -155,7 +155,11 @@ class User implements UserInterface
 
     public function getStringBirthDate(): string
     {
-        return $this->getBirthDate()->format('d.m.Y');
+        $birth_date = $this->getBirthDate();
+        if($birth_date)
+            return $birth_date->format('d.m.Y');
+        else
+            return "";
     }
 
     public function setBirthDate(?\DateTimeInterface $birth_date): self

@@ -13,7 +13,6 @@ class OrganizationType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('user_id')
         ;
     }
 

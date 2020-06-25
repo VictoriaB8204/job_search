@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.organization_id , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Организация"}) }}
+    {{ form_row(form.work_place , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Адрес места работы"}) }}
+    {{ form_row(form.position_id , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Должность"}) }}
+    {{ form_row(form.status , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Статус вакансии"}) }}
+    {{ form_row(form.work_experience , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Опыт работы"}) }}
+    {{ form_row(form.education , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Образование"}) }}
+    {{ form_row(form.salary , {'row_attr':{'class':'form-group'}, 'label' : "Зарплата"}) }}
+    {{ form_row(form.payment_form , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Форма оплаты труда"}) }}
+    {{ form_row(form.employment_type , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Вид занятости"}) }}
+    {{ form_row(form.job_description , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Описание работы"}) }}
+    {{ form_row(form.learning_opportunity , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Возможность обучения"}) }}
+    {{ form_row(form.info , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Дополнительно"}) }}
+
+    <button class="btn">{{ button_label|default('Сохранить') }}</button>
 {{ form_end(form) }}

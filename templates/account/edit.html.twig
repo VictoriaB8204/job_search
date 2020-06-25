@@ -1,12 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
 {% block title %}Личный кабинет{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
          xmlns="http://www.w3.org/1999/html">
 
-    <h1>Личный кабинет</h1>
+    <h2>Личные данные</h2>
 
     {{ form_start(form) }}
     {{ form_row(form.name , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }}) }}
