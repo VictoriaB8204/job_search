@@ -1,0 +1,41 @@
+{% extends 'account/base_for_account.html.twig' %}
+
+{% block title %}Модерация{% endblock %}
+
+{% block content %}
+    <h2>Модерация резюме</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Должность</th>
+                <th>Статус резюме</th>
+                <th>Статус модерации</th>
+                <th>Опыт работы</th>
+                <th>Образование</th>
+                <th>Зарплата</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for resume in resumes %}
+            <tr>
+                <td>{{ resume.getPositionId }}</td>
+                <td>{{ resume.status }}</td>
+                <td>{{ resume.moderationStatus }}</td>
+                <td>{{ resume.workExperience }}</td>
+                <td>{{ resume.education }}</td>
+                <td>{{ resume.salary }}</td>
+                <td>
+                    <a href="{{ path('moderate_show', {'id': resume.id}) }}">Открыть</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Нет не расмотренных резюме</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

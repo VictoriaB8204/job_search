@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}Edit FamilyStatus{% endblock %}
+{% block title %}Семейное положение{% endblock %}
 
-{% block body %}
-    <h1>Edit FamilyStatus</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Изменить семейное положение</h2>
 
-    {{ include('family_status/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('family_status_index') }}">back to list</a>
+    {{ include('family_status/_form.html.twig', {'button_label': 'Сохранить'}) }}
 
     {{ include('family_status/_delete_form.html.twig') }}
 {% endblock %}

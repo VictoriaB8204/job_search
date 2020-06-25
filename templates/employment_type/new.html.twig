@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}New EmploymentType{% endblock %}
+{% block title %}Виды деятлеьности{% endblock %}
 
-{% block body %}
-    <h1>Create new EmploymentType</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Создать вид деятельности</h2>
 
     {{ include('employment_type/_form.html.twig') }}
 
-    <a href="{{ path('employment_type_index') }}">back to list</a>
 {% endblock %}

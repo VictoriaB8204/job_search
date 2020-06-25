@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}New PaymentForm{% endblock %}
+{% block title %}Формы оплаты труда{% endblock %}
 
-{% block body %}
-    <h1>Create new PaymentForm</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Создать форму оплаты труда</h2>
 
     {{ include('payment_form/_form.html.twig') }}
 
-    <a href="{{ path('payment_form_index') }}">back to list</a>
 {% endblock %}

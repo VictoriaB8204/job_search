@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}New Position{% endblock %}
+{% block title %}Должности{% endblock %}
 
-{% block body %}
-    <h1>Create new Position</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Создать должность</h2>
 
     {{ include('position/_form.html.twig') }}
 
-    <a href="{{ path('position_index') }}">back to list</a>
 {% endblock %}

@@ -17,6 +17,7 @@
             <tr>
                 <td>{{ organization.name }}</td>
                 <td>
+                    <a href="{{ path('organization_show', {'id': organization.id}) }}">Открыть</a>
                     <a href="{{ path('organization_edit', {'id': organization.id}) }}">Изменить</a>
                 </td>
             </tr>

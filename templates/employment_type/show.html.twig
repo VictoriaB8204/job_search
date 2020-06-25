@@ -1,26 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}EmploymentType{% endblock %}
+{% block title %}Виды деятельности{% endblock %}
 
-{% block body %}
-    <h1>EmploymentType</h1>
+{% block content %}
+    <h2>Вид деятельности</h2>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ employment_type.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
+                <th>Название вида деятельности</th>
                 <td>{{ employment_type.name }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('employment_type_index') }}">back to list</a>
-
-    <a href="{{ path('employment_type_edit', {'id': employment_type.id}) }}">edit</a>
+    <a href="{{ path('employment_type_edit', {'id': employment_type.id}) }}">Изменить</a>
 
     {{ include('employment_type/_delete_form.html.twig') }}
 {% endblock %}

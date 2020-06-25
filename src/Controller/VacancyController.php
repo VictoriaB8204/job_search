@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Vacancy;
+use App\Form\VacancyModerateType;
 use App\Form\VacancyType;
 use App\Repository\VacancyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,38 @@ class VacancyController extends AbstractController
 
         return $this->render('vacancy/index.html.twig', [
             'vacancies' => $vacancyRepository->findBy(['user_id' => $this->getUser()->getId()]),
+        ]);
+    }
+
+    /**
+     * @Route("/vacancy_in_moderate", name="vacancy_in_moderate", methods={"GET"})
+     */
+    public function vacancy_in_moderate(VacancyRepository $vacancyRepository): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        return $this->render('vacancy/moderate_index.html.twig', [
+            'vacancies' => $vacancyRepository->findBy(['moderation_status' => 'на рассмотрении']),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/moderate", name="moderate_show", methods={"GET","POST"})
+     */
+    public function moderate(Request $request, Vacancy $vacancy): Response
+    {
+        $form = $this->createForm(VacancyModerateType::class, $vacancy);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('vacancy_in_moderate');
+        }
+
+        return $this->render('vacancy/moderate_show.html.twig', [
+            'vacancy' => $vacancy,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,6 +104,8 @@ class VacancyController extends AbstractController
      */
     public function edit(Request $request, Vacancy $vacancy): Response
     {
+        $vacancy->setModerationStatus('на рассмотрении');
+
         $form = $this->createForm(VacancyType::class, $vacancy);
         $form->handleRequest($request);
 

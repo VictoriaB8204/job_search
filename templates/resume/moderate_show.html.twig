@@ -1,6 +1,6 @@
 {% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}Мои резюме{% endblock %}
+{% block title %}Модерация резюме{% endblock %}
 
 {% block content %}
     <h2>Резюме: {{ resume.getPositionId }}</h2>
@@ -15,12 +15,6 @@
                 <th>Статус модерации</th>
                 <td>{{ resume.moderationStatus }}</td>
             </tr>
-            {% if resume.moderationStatus == 'не опубликовано' %}
-                <tr>
-                    <th>Причина отказа в публикации</th>
-                    <td>{{ resume.refuseReason }}</td>
-                </tr>
-            {% endif %}
             <tr>
                 <th>Опыт работы</th>
                 <td>{{ resume.workExperience }}</td>
@@ -44,7 +38,10 @@
         </tbody>
     </table>
 
-    <a href="{{ path('resume_edit', {'id': resume.id}) }}">Изменить</a>
+{{ form_start(form) }}
+    {{ form_row(form.moderation_status , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Статус модерации"}) }}
+    {{ form_row(form.refuse_reason , {'row_attr':{'class':'form-group'}, 'attr' : {'class': 'form-control' }, 'label' : "Причина отказа в публикации"}) }}
 
-    {{ include('resume/_delete_form.html.twig') }}
+    <button class="btn">{{ button_label|default('Сохранить') }}</button>
+{{ form_end(form) }}
 {% endblock %}

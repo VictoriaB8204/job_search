@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}Edit PaymentForm{% endblock %}
+{% block title %}Формы оплаты труда{% endblock %}
 
-{% block body %}
-    <h1>Edit PaymentForm</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Изменить форму оплаты труда</h2>
 
-    {{ include('payment_form/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('payment_form_index') }}">back to list</a>
+    {{ include('payment_form/_form.html.twig', {'button_label': 'Сохранить'}) }}
 
     {{ include('payment_form/_delete_form.html.twig') }}
 {% endblock %}

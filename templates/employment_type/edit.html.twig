@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}Edit EmploymentType{% endblock %}
+{% block title %}Виды деятельности{% endblock %}
 
-{% block body %}
-    <h1>Edit EmploymentType</h1>
+{% block content %}
+<div class="mycontainer" style=" min-width: 16rem; max-width: 30rem;  margin-right: auto;  margin-left: auto;"
+     xmlns="http://www.w3.org/1999/html">
+    <h2>Изменить вид деятельности</h2>
 
-    {{ include('employment_type/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('employment_type_index') }}">back to list</a>
+    {{ include('employment_type/_form.html.twig', {'button_label': 'Сохранить'}) }}
 
     {{ include('employment_type/_delete_form.html.twig') }}
 {% endblock %}

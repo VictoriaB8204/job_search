@@ -1,35 +1,33 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/base_for_account.html.twig' %}
 
-{% block title %}EmploymentType index{% endblock %}
+{% block title %}Виды деятельности{% endblock %}
 
-{% block body %}
-    <h1>EmploymentType index</h1>
+{% block content %}
+    <h2>Виды деятельности</h2>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
+                <th>Название вида деятельности</th>
+                <th>Действия</th>
             </tr>
         </thead>
         <tbody>
         {% for employment_type in employment_types %}
             <tr>
-                <td>{{ employment_type.id }}</td>
                 <td>{{ employment_type.name }}</td>
                 <td>
-                    <a href="{{ path('employment_type_show', {'id': employment_type.id}) }}">show</a>
-                    <a href="{{ path('employment_type_edit', {'id': employment_type.id}) }}">edit</a>
+                    <a href="{{ path('employment_type_show', {'id': employment_type.id}) }}">Открыть</a>
+                    <a href="{{ path('employment_type_edit', {'id': employment_type.id}) }}">Изменить</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Нет видов деятельности</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('employment_type_new') }}">Create new</a>
+    <a href="{{ path('employment_type_new') }}">Создать</a>
 {% endblock %}

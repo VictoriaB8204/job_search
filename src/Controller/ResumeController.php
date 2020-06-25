@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Resume;
+use App\Form\ResumeModerateType;
 use App\Form\ResumeType;
 use App\Repository\ResumeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,6 +25,38 @@ class ResumeController extends AbstractController
 
         return $this->render('resume/index.html.twig', [
             'resumes' => $resumeRepository->findBy(['user_id' => $this->getUser()->getId()]),
+        ]);
+    }
+
+    /**
+     * @Route("/resume_in_moderate", name="resume_in_moderate", methods={"GET"})
+     */
+    public function resume_in_moderate(ResumeRepository $resumeRepository): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        return $this->render('resume/moderate_index.html.twig', [
+            'resumes' => $resumeRepository->findBy(['moderation_status' => 'на рассмотрении']),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/moderate", name="moderate_show", methods={"GET","POST"})
+     */
+    public function moderate(Request $request, Resume $resume): Response
+    {
+        $form = $this->createForm(ResumeModerateType::class, $resume);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('resume_in_moderate');
+        }
+
+        return $this->render('resume/moderate_show.html.twig', [
+            'resume' => $resume,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -71,6 +104,8 @@ class ResumeController extends AbstractController
      */
     public function edit(Request $request, Resume $resume): Response
     {
+        $resume->setModerationStatus('на рассмотрении');
+
         $form = $this->createForm(ResumeType::class, $resume);
         $form->handleRequest($request);
 
