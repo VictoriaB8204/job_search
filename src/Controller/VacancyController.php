@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Vacancy;
 use App\Form\VacancyModerateType;
 use App\Form\VacancyType;
+use App\Repository\OrganizationRepository;
 use App\Repository\VacancyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +42,7 @@ class VacancyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/moderate", name="moderate_show", methods={"GET","POST"})
+     * @Route("/{id}/moderate_vacancy", name="moderate_show_vacancy", methods={"GET","POST"})
      */
     public function moderate(Request $request, Vacancy $vacancy): Response
     {
@@ -63,7 +64,7 @@ class VacancyController extends AbstractController
     /**
      * @Route("/new", name="vacancy_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, OrganizationRepository $organizationRepository): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -72,7 +73,9 @@ class VacancyController extends AbstractController
         $vacancy->setUserId($this->getUser());
         $vacancy->setModerationStatus('на рассмотрении');
 
-        $form = $this->createForm(VacancyType::class, $vacancy);
+        $form = $this->createForm(VacancyType::class, $vacancy, [
+            'userOrganizations' => $vacancy->getUserId()->getOrganizations()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -85,7 +88,7 @@ class VacancyController extends AbstractController
 
         return $this->render('vacancy/new.html.twig', [
             'vacancy' => $vacancy,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -105,8 +108,11 @@ class VacancyController extends AbstractController
     public function edit(Request $request, Vacancy $vacancy): Response
     {
         $vacancy->setModerationStatus('на рассмотрении');
+        $vacancy->setRefuseReason(null);
 
-        $form = $this->createForm(VacancyType::class, $vacancy);
+        $form = $this->createForm(VacancyType::class, $vacancy, [
+            'userOrganizations' => $vacancy->getUserId()->getOrganizations()
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

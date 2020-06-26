@@ -27,7 +27,7 @@
                 <td>{{ vacancy.workExperience }}</td>
                 <td>{{ vacancy.salary }}</td>
                 <td>
-                    <a href="{{ path('moderate_show', {'id': vacancy.id}) }}">Открыть</a>
+                    <a href="{{ path('moderate_show_vacancy', {'id': vacancy.id}) }}">Открыть</a>
                 </td>
             </tr>
         {% else %}

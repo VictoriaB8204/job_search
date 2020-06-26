@@ -58,4 +58,42 @@ class Registration extends AbstractController
             array('form' => $form->createView())
         );
     }
+
+    /**
+     * @Route("/admin_register", name="admin_register")
+     */
+    public function adminRegisterAction(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        // 1) постройте форму
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
+
+        // 2) обработайте отправку (произойдёт только в POST)
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // 3) Зашифруйте пароль (вы также можете сделать это через слушатель Doctrine)
+            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+
+            $user->setRoles(['ROLE_ADMIN']);
+
+            // 4) сохраните Пользователя!
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+
+            // ... сделайте любую другую работу - вроде отправки письма и др
+            // может, установите "флеш" сообщение об успешном выполнении для пользователя
+
+            return $this->render('account/index.html.twig', [
+                'user' => $this->getUser(),
+            ]);
+        }
+
+        return $this->render(
+            'registration/admin_register.html.twig',
+            array('form' => $form->createView())
+        );
+    }
 }

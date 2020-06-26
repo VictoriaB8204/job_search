@@ -41,7 +41,7 @@ class ResumeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/moderate", name="moderate_show", methods={"GET","POST"})
+     * @Route("/{id}/moderate_resume", name="moderate_show_resume", methods={"GET","POST"})
      */
     public function moderate(Request $request, Resume $resume): Response
     {
@@ -105,6 +105,7 @@ class ResumeController extends AbstractController
     public function edit(Request $request, Resume $resume): Response
     {
         $resume->setModerationStatus('на рассмотрении');
+        $resume->setRefuseReason(null);
 
         $form = $this->createForm(ResumeType::class, $resume);
         $form->handleRequest($request);
