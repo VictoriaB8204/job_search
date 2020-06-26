@@ -12,7 +12,8 @@
     </head>
     <body>
         <div>
-            <a href="{{ url('home') }}">Поиск</a>
+            <a href="{{ url('vacancy_search_index') }}">Поиск вакансий</a>
+            <a href="{{ url('resume_search_index') }}">Поиск резюме</a>
             {% if app.user is empty %}
                 <a href="{{ url('app_login') }}">Войти</a>
             {% else %}

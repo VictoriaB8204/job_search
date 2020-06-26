@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Поиск работы{% endblock %}
+
+{% block body %}
+    <h2>Резюме: {{ resume.getPositionId }}</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Опыт работы</th>
+                <td>{{ resume.workExperience }}</td>
+            </tr>
+            <tr>
+                <th>Образование</th>
+                <td>{{ resume.education }}</td>
+            </tr>
+            <tr>
+                <th>Зарплата</th>
+                <td>{{ resume.salary }}</td>
+            </tr>
+            <tr>
+                <th>Личные качества</th>
+                <td>{{ resume.personalQuality }}</td>
+            </tr>
+            <tr>
+                <th>Дополнительно</th>
+                <td>{{ resume.info }}</td>
+            </tr>
+            <tr>
+                <th>Страничка пользователя</th>
+                <td>
+                    <a href="{{ path('resume_search_show_user', {'id': resume.id}) }}">Страничка пользователя</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" onclick="history.back();" value="Назад"/>
+
+{% endblock %}

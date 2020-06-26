@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Поиск работы{% endblock %}
+
+{% block body %}
+    <h2>Вакансия: {{ vacancy.getPositionId }}</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Организация</th>
+                <td>{{ vacancy.getOrganizationId }}</td>
+            </tr>
+            <tr>
+                <th>Адрес места работы</th>
+                <td>{{ vacancy.workPlace }}</td>
+            </tr>
+            <tr>
+                <th>Опыт работы</th>
+                <td>{{ vacancy.workExperience }}</td>
+            </tr>
+            <tr>
+                <th>Образование</th>
+                <td>{{ vacancy.education }}</td>
+            </tr>
+            <tr>
+                <th>Зарплата</th>
+                <td>{{ vacancy.salary }}</td>
+            </tr>
+            <tr>
+                <th>Форма оплаты труда</th>
+                <td>{{ vacancy.getPaymentForm }}</td>
+            </tr>
+            <tr>
+                <th>Вид занятости</th>
+                <td>{{ vacancy.getEmploymentType }}</td>
+            </tr>
+            <tr>
+                <th>Описание работы</th>
+                <td>{{ vacancy.jobDescription }}</td>
+            </tr>
+            <tr>
+                <th>Возможность обучения</th>
+                <td>{{ vacancy.learningOpportunity }}</td>
+            </tr>
+            <tr>
+                <th>Дополнительно</th>
+                <td>{{ vacancy.info }}</td>
+            </tr>
+            <tr>
+                <th>Страничка пользователя</th>
+                <td>
+                    <a href="{{ path('vacancy_search_show_user', {'id': vacancy.id}) }}">Страничка пользователя</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" onclick="history.back();" value="Назад"/>
+
+{% endblock %}
